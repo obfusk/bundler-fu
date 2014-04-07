@@ -1,0 +1,68 @@
+# --                                                            ; {{{1
+#
+# File        : bundler-fu/lockfile.tt
+# Maintainer  : Felix C. Stegerman <flx@obfusk.net>
+# Date        : 2014-02-20
+#
+# Copyright   : Copyright (C) 2014  Felix C. Stegerman
+# Licence     : LGPLv3+
+#
+# --                                                            ; }}}1
+
+module BundlerFu::Lockfile
+  grammar Lockfile
+    rule file
+      gits:( git* ) paths:( path* ) gems platforms dependencies <RootNode>
+    end
+    rule git
+      'GIT' "\n" remote revision branch:(branch)? specs "\n"
+    end
+    rule path
+      'PATH' "\n" remote specs "\n"
+    end
+    rule gems
+      'GEM' "\n" remote specs "\n"
+    end
+    rule remote
+      '  remote: ' url "\n"
+    end
+    rule revision
+      '  revision: ' revision:word "\n"
+    end
+    rule branch
+      '  branch: ' branch:word "\n"
+    end
+    rule specs
+      '  specs:' "\n" specs:( spec* )
+    end
+    rule spec
+      '    ' gem:word ' ' version "\n" deps:( dep* )
+    end
+    rule dep
+      '      ' gem:word version:( ' ' version )? "\n"
+    end
+    rule platforms
+      'PLATFORMS' "\n" platforms:( platform* ) "\n"
+    end
+    rule platform
+      '  ' name:( 'ruby' ) "\n"
+    end
+    rule dependencies
+      'DEPENDENCIES' "\n" dependencies:( dependency* )
+    end
+    rule dependency
+      '  ' gem:word bang:( '!' )? version:( ' ' version )? "\n"
+    end
+    rule word
+      [A-Za-z0-9_-]+
+    end
+    rule url
+      ( !"\n" . )+                                              # TODO
+    end
+    rule version
+      '(' value:( !')' . )+  ')'                                # TODO
+    end
+  end
+end
+
+# vim: set tw=70 sw=2 sts=2 et fdm=marker :
