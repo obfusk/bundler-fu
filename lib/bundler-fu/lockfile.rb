@@ -2,7 +2,7 @@
 #
 # File        : bundler-fu/lockfile.rb
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2014-02-20
+# Date        : 2014-04-08
 #
 # Copyright   : Copyright (C) 2014  Felix C. Stegerman
 # Licence     : LGPLv3+
