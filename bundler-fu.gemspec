@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.files       = %w{ .yardopts README.md Rakefile } \
                 + %w{ bundler-fu.gemspec } \
                 + Dir['test/Gemfile.lock.[1-9]'] \
-                + Dir['{lib,spec}/**/*.rb']
+                + Dir['{lib,spec}/**/*.{rb,tt}']
 
   s.add_runtime_dependency 'treetop'
 
